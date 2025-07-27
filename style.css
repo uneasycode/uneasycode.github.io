@@ -48,6 +48,8 @@
   --color-surface: var(--color-cream-100);
   --color-text: var(--color-slate-900);
   --color-text-secondary: var(--color-slate-500);
+  --color-text2: var(--color-black);
+  --color-text2-secondary: var(--color-black);
   --color-primary: var(--color-teal-500);
   --color-primary-hover: var(--color-teal-600);
   --color-primary-active: var(--color-teal-700);
@@ -168,6 +170,8 @@
     --color-surface: var(--color-charcoal-800);
     --color-text: var(--color-gray-200);
     --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+    --color-text2: var(--color-black);
+    --color-text2-secondary: var(--color-black);
     --color-primary: var(--color-teal-300);
     --color-primary-hover: var(--color-teal-400);
     --color-primary-active: var(--color-teal-800);
@@ -228,6 +232,8 @@
   --color-surface: var(--color-charcoal-800);
   --color-text: var(--color-gray-200);
   --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+  --color-text2: var(--color-black);
+  --color-text2-secondary: var(--color-black);
   --color-primary: var(--color-teal-300);
   --color-primary-hover: var(--color-teal-400);
   --color-primary-active: var(--color-teal-800);
@@ -274,6 +280,8 @@
   --color-surface: var(--color-cream-100);
   --color-text: var(--color-slate-900);
   --color-text-secondary: var(--color-slate-500);
+  --color-text2: var(--color-black);
+  --color-text2-secondary: var(--color-black);
   --color-primary: var(--color-teal-500);
   --color-primary-hover: var(--color-teal-600);
   --color-primary-active: var(--color-teal-700);
@@ -902,13 +910,15 @@ select.form-control {
 .section-title {
     font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-bold);
-    color: var(--color-text);
+    color: var(--color-text2);
     margin-bottom: var(--space-16);
+    margin-top: var(--space-32);
+
 }
 
 .section-subtitle {
     font-size: var(--font-size-lg);
-    color: var(--color-text-secondary);
+    color: var(--color-text2-secondary);
     margin-bottom: var(--space-32);
 }
 
@@ -944,7 +954,7 @@ select.form-control {
 .service-card h3 {
     font-size: var(--font-size-xl);
     font-weight: var(--font-weight-semibold);
-    color: var(--color-text);
+    color: var(--color-text2);
     margin-bottom: var(--space-16);
 }
 
