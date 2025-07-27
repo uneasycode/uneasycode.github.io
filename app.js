@@ -1,4 +1,4 @@
-// NetworkPro Solutions - Main JavaScript Application
+// IDecodeNetworks Solutions - Main JavaScript Application
 
 // Application state
 let currentSection = 'home';
@@ -442,7 +442,7 @@ Project Description:
 ${description || 'No description provided'}
 
 ---
-Sent from NetworkPro Solutions website
+Sent from IDecodeNetworks website
     `);
     
     const mailtoLink = `mailto:info@idecodenetworks.com?subject=${subject}&body=${body}`;
@@ -514,7 +514,7 @@ function adjustNetworkVisualizationForMobile() {
 }
 
 // Export functions for potential external use
-window.NetworkProApp = {
+window.IDecodeNetworksApp = {
     showSection,
     showBlogPost,
     getCurrentSection,
