@@ -8,7 +8,6 @@ permalink: /rsvp-message-types/
 
 **Understanding RSVP message types is crucial for troubleshooting MPLS Traffic Engineering tunnels. When link protection is enabled, specific message flows occur during failures that network engineers must understand.**
 
-[generated_image:60]
 
 ## RSVP Message Types Overview
 
@@ -25,7 +24,7 @@ RSVP uses several message types to establish, maintain, and tear down LSP tunnel
 - **ResvErr**: Reports reservation-related errors (sent downstream)
 - **ResvConf**: Confirms successful reservation (sent downstream)
 
-[generated_image:59]
+
 
 ## Message Flow During Normal Operation
 
