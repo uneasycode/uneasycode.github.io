@@ -3,6 +3,8 @@ layout: page
 title: "RSVP (Resource ReSerVation Protocol): Making Real-Time Internet Work"
 permalink: /rsvp/
 ---
+
+
 # RSVP (Resource ReSerVation Protocol): Making Real-Time Internet Work
 
 **Do you know how your favorite apps manage smooth video calls and lag-free gaming, even on a busy network? It’s thanks to RSVP – the Resource ReSerVation Protocol.**
