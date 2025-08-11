@@ -26,6 +26,12 @@ const appData = {
       "section": "expert-assistance"
     },
     {
+      "title": "Testing Services",
+      "icon": "fas fa-flask",
+      "description": "Comprehensive network testing using open source platforms and tools",
+      "section": "testing"
+    },
+    {
       "title": "Technical Blog",
       "icon": "fas fa-blog", 
       "description": "In-depth articles on networking protocols and best practices",
@@ -162,6 +168,102 @@ const appData = {
       "status": "Cloud",
       "badge_color": "info", 
       "description": "Designed hybrid cloud connectivity solution with redundant VPN tunnels and optimized routing for HIPAA compliance."
+    }
+  ],
+  "testing_services": [
+    {
+      "title": "Pre-Production Testing",
+      "icon": "fas fa-flask",
+      "description": "Validate network designs and configurations before deployment in production environments."
+    },
+    {
+      "title": "Multi-Vendor Verification",
+      "icon": "fas fa-check-double",
+      "description": "Test interoperability and compatibility across different vendor equipment and solutions."
+    },
+    {
+      "title": "Feature Validation",
+      "icon": "fas fa-cogs",
+      "description": "Comprehensive testing of specific features and protocols to ensure proper functionality."
+    },
+    {
+      "title": "Performance Analysis",
+      "icon": "fas fa-chart-line",
+      "description": "Benchmark network performance, throughput, latency, and scalability characteristics."
+    },
+    {
+      "title": "Compliance Testing",
+      "icon": "fas fa-shield-alt",
+      "description": "Verify adherence to industry standards, regulatory requirements, and security policies."
+    },
+    {
+      "title": "Test Report Generation",
+      "icon": "fas fa-file-alt",
+      "description": "Detailed documentation and analysis to support decision-making and planning."
+    }
+  ],
+  "open_source_tools": [
+    {
+      "name": "GNS3",
+      "icon": "fas fa-network-wired",
+      "description": "Network simulation platform"
+    },
+    {
+      "name": "EVE-NG",
+      "icon": "fas fa-server",
+      "description": "Multi-vendor virtual environment"
+    },
+    {
+      "name": "Mininet",
+      "icon": "fas fa-sitemap",
+      "description": "SDN prototyping/emulation"
+    },
+    {
+      "name": "Containerlab",
+      "icon": "fas fa-cube",
+      "description": "Container-based network labs"
+    },
+    {
+      "name": "CORE",
+      "icon": "fas fa-project-diagram",
+      "description": "Open research emulator"
+    },
+    {
+      "name": "Kathara",
+      "icon": "fas fa-layer-group",
+      "description": "Container network emulation"
+    }
+  ],
+  "testing_process": [
+    {
+      "step": 1,
+      "title": "Requirements Analysis",
+      "description": "Define testing scope, objectives, and success criteria based on your network requirements."
+    },
+    {
+      "step": 2,
+      "title": "Lab Environment Setup",
+      "description": "Configure virtual testing environment using appropriate open source tools and platforms."
+    },
+    {
+      "step": 3,
+      "title": "Configuration Implementation",
+      "description": "Implement network configurations and topologies matching your production design."
+    },
+    {
+      "step": 4,
+      "title": "Test Execution",
+      "description": "Execute comprehensive test scenarios including normal operation and failure conditions."
+    },
+    {
+      "step": 5,
+      "title": "Results Analysis",
+      "description": "Analyze test results, identify issues, and validate performance against requirements."
+    },
+    {
+      "step": 6,
+      "title": "Report & Recommendations",
+      "description": "Deliver detailed test reports with findings, recommendations, and deployment guidance."
     }
   ],
   "blog_posts": [
@@ -371,21 +473,7 @@ class NavigationManager {
   }
   
   init() {
-    console.log('Initializing navigation manager...');
-    
-    // Wait for DOM to be fully loaded
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => this.setupNavigation());
-    } else {
-      this.setupNavigation();
-    }
-  }
-  
-  setupNavigation() {
-    console.log('Setting up navigation...');
-    
-    // Add click listeners to navigation links
-    this.addNavigationListeners();
+    console.log('Initializing navigation...');
     
     // Handle browser back/forward
     window.addEventListener('popstate', (e) => {
@@ -393,48 +481,44 @@ class NavigationManager {
       this.showSection(section, false);
     });
     
-    // Set initial state
-    this.showSection('home', false);
+    // Set initial state after DOM is ready
+    setTimeout(() => {
+      this.addAllNavigationListeners();
+      this.showSection('home', false);
+    }, 100);
   }
   
-  addNavigationListeners() {
-    // Remove any existing listeners first
-    document.removeEventListener('click', this.handleNavigationClick);
+  addAllNavigationListeners() {
+    // Get all elements with data-section attribute
+    const sectionLinks = document.querySelectorAll('[data-section]');
+    console.log(`Found ${sectionLinks.length} section links`);
     
-    // Add single event listener using delegation
-    document.addEventListener('click', this.handleNavigationClick.bind(this));
-    
-    console.log('Navigation listeners added');
-  }
-  
-  handleNavigationClick(e) {
-    // Find the target element with data-section attribute
-    let target = e.target;
-    
-    // Traverse up to find element with data-section
-    while (target && target !== document) {
-      if (target.hasAttribute('data-section')) {
+    sectionLinks.forEach((link, index) => {
+      // Remove existing listeners to prevent duplicates
+      const newLink = link.cloneNode(true);
+      link.parentNode.replaceChild(newLink, link);
+      
+      newLink.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
         
-        const targetSection = target.getAttribute('data-section');
-        console.log(`Navigation clicked: ${targetSection}`);
+        const targetSection = newLink.getAttribute('data-section');
+        console.log(`Navigation clicked: ${targetSection} (link ${index + 1})`);
         
         if (targetSection) {
           this.showSection(targetSection);
         }
-        return;
-      }
-      target = target.parentElement;
-    }
+      });
+      
+      console.log(`Added listener to link ${index + 1}: ${newLink.getAttribute('data-section')}`);
+    });
   }
   
   showSection(sectionName, updateHistory = true) {
-    console.log(`Attempting to show section: ${sectionName}`);
+    console.log(`Showing section: ${sectionName}`);
     
     // Hide all sections
-    const sections = document.querySelectorAll('.section');
-    sections.forEach(section => {
+    document.querySelectorAll('.section').forEach(section => {
       section.classList.remove('active');
     });
     
@@ -449,8 +533,7 @@ class NavigationManager {
       
       // Update browser history
       if (updateHistory) {
-        const url = sectionName === 'home' ? '/' : `#${sectionName}`;
-        history.pushState({ section: sectionName }, '', url);
+        history.pushState({ section: sectionName }, '', `#${sectionName}`);
       }
       
       // Scroll to top
@@ -496,7 +579,7 @@ class ContentManager {
             ${tier.topics.map(topic => `<li>${topic}</li>`).join('')}
           </ul>
           <div class="mt-4 text-center">
-            <a href="#contact" class="btn btn-primary" data-section="contact">
+            <a href="#contact" class="btn btn-primary contact-btn" data-section="contact">
               <i class="fas fa-envelope me-2"></i>Enroll Now
             </a>
           </div>
@@ -553,6 +636,67 @@ class ContentManager {
       </div>
     `).join('');
   }
+
+  static renderTestingServices() {
+    const container = document.getElementById('testing-services-grid');
+    if (!container) {
+      console.log('Testing services container not found');
+      return;
+    }
+
+    console.log('Rendering testing services...');
+    container.innerHTML = appData.testing_services.map(service => `
+      <div class="col-md-6 col-lg-4">
+        <div class="testing-card">
+          <div class="testing-icon">
+            <i class="${service.icon}"></i>
+          </div>
+          <h4>${service.title}</h4>
+          <p>${service.description}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  static renderOpenSourceTools() {
+    const container = document.getElementById('open-source-tools-grid');
+    if (!container) {
+      console.log('Open source tools container not found');
+      return;
+    }
+
+    console.log('Rendering open source tools...');
+    container.innerHTML = appData.open_source_tools.map(tool => `
+      <div class="col-md-6 col-lg-4">
+        <div class="tool-card">
+          <div class="tool-icon">
+            <i class="${tool.icon}"></i>
+          </div>
+          <h5>${tool.name}</h5>
+          <p>${tool.description}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  static renderTestingProcess() {
+    const container = document.getElementById('testing-process-grid');
+    if (!container) {
+      console.log('Testing process container not found');
+      return;
+    }
+
+    console.log('Rendering testing process...');
+    container.innerHTML = appData.testing_process.map(process => `
+      <div class="col-md-6 col-lg-4">
+        <div class="process-card">
+          <div class="process-number">${process.step}</div>
+          <h5>${process.title}</h5>
+          <p>${process.description}</p>
+        </div>
+      </div>
+    `).join('');
+  }
   
   static renderBlogPosts() {
     const container = document.getElementById('blog-grid');
@@ -579,13 +723,14 @@ class ContentManager {
     `).join('');
     
     // Add click handlers for blog posts
-    document.querySelectorAll('.blog-card').forEach(card => {
-      card.addEventListener('click', (e) => {
-        e.preventDefault();
-        const postId = card.getAttribute('data-post-id');
-        BlogManager.loadPost(postId);
+    setTimeout(() => {
+      document.querySelectorAll('.blog-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const postId = card.getAttribute('data-post-id');
+          BlogManager.loadPost(postId);
+        });
       });
-    });
+    }, 100);
   }
 }
 
@@ -613,16 +758,12 @@ class BlogManager {
       // Load embedded content
       const embeddedPost = embeddedBlogPosts[postId];
       if (embeddedPost) {
-        setTimeout(() => {
-          contentContainer.innerHTML = `
-            <div class="blog-post-content">
-              ${embeddedPost.content}
-            </div>
-          `;
-          if (window.navigationManager) {
-            window.navigationManager.showSection('blog-post');
-          }
-        }, 300);
+        contentContainer.innerHTML = `
+          <div class="blog-post-content">
+            ${embeddedPost.content}
+          </div>
+        `;
+        window.navigationManager.showSection('blog-post');
       } else {
         contentContainer.innerHTML = '<div class="error">Post content not found.</div>';
       }
@@ -635,9 +776,7 @@ class BlogManager {
             ${markdownContent}
           </div>
         `;
-        if (window.navigationManager) {
-          window.navigationManager.showSection('blog-post');
-        }
+        window.navigationManager.showSection('blog-post');
       }, 500);
     }
   }
@@ -884,23 +1023,24 @@ class BlogManager {
 
 // Initialize application
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM Content Loaded - Initializing IDecodeNetworks application...');
+  console.log('DOM Content Loaded - Initializing application...');
   
-  try {
-    // Initialize navigation manager
-    window.navigationManager = new NavigationManager();
-    
-    // Render all content
+  // Initialize navigation
+  window.navigationManager = new NavigationManager();
+  
+  // Render content
+  setTimeout(() => {
     ContentManager.renderTrainingTiers();
     ContentManager.renderSkills();
     ContentManager.renderPortfolio();
+    ContentManager.renderTestingServices();
+    ContentManager.renderOpenSourceTools();
+    ContentManager.renderTestingProcess();
     ContentManager.renderBlogPosts();
     
-    console.log('✅ IDecodeNetworks Solutions website initialized successfully!');
-    console.log('✅ Network diagram now uses simple CSS animations instead of complex SVG');
-    console.log('✅ All navigation and functionality should be working');
+    // Re-initialize navigation after content is rendered
+    window.navigationManager.addAllNavigationListeners();
     
-  } catch (error) {
-    console.error('❌ Error initializing application:', error);
-  }
+    console.log('IDecodeNetworks Solutions website initialized successfully!');
+  }, 200);
 });

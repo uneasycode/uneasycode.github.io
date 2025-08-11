@@ -851,11 +851,9 @@ body {
     margin-bottom: var(--space-12);
 }
 
-/* Network Visualization - Fixed Simple Version */
+/* Simple Network Diagram - WORKING VERSION */
 .network-visualization {
     padding: 2rem 0;
-    position: relative;
-    z-index: 2;
 }
 
 .network-grid {
@@ -876,8 +874,8 @@ body {
     background: rgba(33, 128, 141, 0.1);
     border-radius: 12px;
     border: 2px solid var(--color-primary);
-    transition: transform 0.3s ease;
     animation: iconPulse 3s ease-in-out infinite;
+    transition: transform 0.3s ease;
 }
 
 .network-icon:hover {
@@ -888,7 +886,6 @@ body {
 .network-icon i {
     font-size: 2rem;
     color: var(--color-primary);
-    transition: all 0.3s ease;
 }
 
 .network-icon span {
@@ -897,44 +894,35 @@ body {
     color: var(--color-cream-50);
 }
 
-/* Enhanced pulsing animation with better visibility */
 @keyframes iconPulse {
-    0% { 
+    0%, 100% { 
         transform: scale(1);
-        opacity: 0.7;
-        border-color: var(--color-primary);
+        opacity: 0.8;
     }
     50% { 
-        transform: scale(1.08);
+        transform: scale(1.05);
         opacity: 1;
-        border-color: var(--color-teal-300);
-        box-shadow: 0 0 25px rgba(50, 184, 198, 0.4);
-    }
-    100% { 
-        transform: scale(1);
-        opacity: 0.7;
-        border-color: var(--color-primary);
     }
 }
 
-/* Apply staggered animation delays with proper timing */
-.network-icon[data-delay="0s"] { 
-    animation-delay: 0s; 
+/* Staggered animation delays */
+.network-icon[data-delay="0s"] {
+    animation-delay: 0s;
 }
-.network-icon[data-delay="0.5s"] { 
-    animation-delay: 0.5s; 
+.network-icon[data-delay="0.5s"] {
+    animation-delay: 0.5s;
 }
-.network-icon[data-delay="1s"] { 
-    animation-delay: 1s; 
+.network-icon[data-delay="1s"] {
+    animation-delay: 1s;
 }
-.network-icon[data-delay="1.5s"] { 
-    animation-delay: 1.5s; 
+.network-icon[data-delay="1.5s"] {
+    animation-delay: 1.5s;
 }
-.network-icon[data-delay="2s"] { 
-    animation-delay: 2s; 
+.network-icon[data-delay="2s"] {
+    animation-delay: 2s;
 }
-.network-icon[data-delay="2.5s"] { 
-    animation-delay: 2.5s; 
+.network-icon[data-delay="2.5s"] {
+    animation-delay: 2.5s;
 }
 
 /* Services Section */
@@ -1153,6 +1141,122 @@ body {
 .portfolio-description {
     color: var(--color-text-secondary);
     line-height: 1.6;
+}
+
+/* Testing Cards */
+.testing-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-card-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-24);
+    text-align: center;
+    transition: all var(--duration-normal) var(--ease-standard);
+    box-shadow: var(--shadow-sm);
+    height: 100%;
+}
+
+.testing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary);
+}
+
+.testing-icon {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: var(--space-16);
+}
+
+.testing-card h4 {
+    color: var(--color-text);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-12);
+}
+
+.testing-card p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+}
+
+/* Open Source Tools */
+.tool-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-card-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-20);
+    text-align: center;
+    transition: all var(--duration-normal) var(--ease-standard);
+    box-shadow: var(--shadow-sm);
+    height: 100%;
+}
+
+.tool-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary);
+}
+
+.tool-icon {
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-bottom: var(--space-12);
+}
+
+.tool-card h5 {
+    color: var(--color-text);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-8);
+}
+
+.tool-card p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    margin: 0;
+}
+
+/* Process Cards */
+.process-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-card-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-20);
+    text-align: center;
+    transition: all var(--duration-normal) var(--ease-standard);
+    box-shadow: var(--shadow-sm);
+    height: 100%;
+    position: relative;
+}
+
+.process-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.process-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--color-primary);
+    color: var(--color-cream-50);
+    border-radius: 50%;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-16);
+}
+
+.process-card h5 {
+    color: var(--color-text);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-8);
+}
+
+.process-card p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    margin: 0;
 }
 
 /* Blog Cards */
@@ -1377,7 +1481,9 @@ body {
     .skill-card,
     .portfolio-card,
     .blog-card,
-    .contact-card {
+    .contact-card,
+    .testing-card,
+    .tool-card {
         margin-bottom: var(--space-20);
     }
     
