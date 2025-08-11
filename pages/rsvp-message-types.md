@@ -1,13 +1,6 @@
----
-title: "RSVP Message Types and Link Protection Fast Reroute"
-layout: page
-permalink: /rsvp-message-types/
----
-
 # RSVP Message Types and Link Protection Fast Reroute
 
 **Understanding RSVP message types is crucial for troubleshooting MPLS Traffic Engineering tunnels. When link protection is enabled, specific message flows occur during failures that network engineers must understand.**
-
 
 ## RSVP Message Types Overview
 
@@ -23,8 +16,6 @@ RSVP uses several message types to establish, maintain, and tear down LSP tunnel
 - **PathErr**: Reports path-related errors (sent upstream)
 - **ResvErr**: Reports reservation-related errors (sent downstream)
 - **ResvConf**: Confirms successful reservation (sent downstream)
-
-
 
 ## Message Flow During Normal Operation
 
@@ -141,93 +132,6 @@ When a protected link fails, the following message sequence occurs:
   Sending new PATH message via alternate route
 ```
 
-## Tcpdump Packet Captures
-
-### **Capturing RSVP Messages**
-
-```bash
-# Basic RSVP packet capture
-tcpdump -i any -n protocol 46 -v -w rsvp_capture.pcap
-
-# More specific capture with IP addresses
-tcpdump -i any -n host 10.1.1.1 and host 10.2.2.2 and protocol 46 -v -w rsvp_messages.pcap
-```
-
-### **Sample RSVP PATH Message Packet**
-
-```
-10:15:23.456789 IP 10.1.1.1 > 10.2.2.2: RSVP: PATH Message
-    RSVP Version: 1, Flags: 0x00
-    Message Type: PATH (1)
-    Message Length: 148
-    Send TTL: 254
-    SESSION Object:
-        Class: 1, C-Type: 7 (IPv4 LSP)
-        Destination: 10.5.5.5
-        Tunnel ID: 100
-        Extended Tunnel ID: 10.1.1.1
-    HOP Object:
-        Class: 3, C-Type: 1 (IPv4)
-        Neighbor Address: 10.1.1.1
-        Logical Interface: 0x12345678
-    EXPLICIT_ROUTE Object:
-        Class: 20, C-Type: 1
-        Subobject: IPv4 Prefix 10.2.2.2/32 (Strict)
-        Subobject: IPv4 Prefix 10.3.3.3/32 (Strict)
-        Subobject: IPv4 Prefix 10.5.5.5/32 (Strict)
-    SESSION_ATTRIBUTE Object:
-        Class: 207, C-Type: 7
-        Setup Priority: 7
-        Hold Priority: 7
-        Flags: 0x07 (Local Protection Desired)
-        Session Name: "Primary_Tunnel"
-```
-
-### **Sample RSVP RESV Message Packet**
-
-```
-10:15:23.892456 IP 10.3.3.3 > 10.2.2.2: RSVP: RESV Message
-    RSVP Version: 1, Flags: 0x00
-    Message Type: RESV (2)
-    Message Length: 112
-    Send TTL: 254
-    SESSION Object:
-        Class: 1, C-Type: 7 (IPv4 LSP)
-        Destination: 10.5.5.5
-        Tunnel ID: 100
-    HOP Object:
-        Class: 3, C-Type: 1 (IPv4)
-        Neighbor Address: 10.3.3.3
-        Logical Interface: 0x87654321
-    LABEL Object:
-        Class: 16, C-Type: 1
-        Label: 24 (0x18)
-    FILTER_SPEC Object:
-        Class: 10, C-Type: 7 (IPv4 LSP)
-        Sender Address: 10.1.1.1
-        LSP ID: 100
-```
-
-### **Sample PathErr Message During Link Failure**
-
-```
-10:20:15.125789 IP 10.2.2.2 > 10.1.1.1: RSVP: PATH_ERR Message
-    RSVP Version: 1, Flags: 0x00
-    Message Type: PATH_ERR (3)
-    Message Length: 96
-    Send TTL: 254
-    SESSION Object:
-        Class: 1, C-Type: 7 (IPv4 LSP)
-        Destination: 10.5.5.5
-        Tunnel ID: 100
-    ERROR_SPEC Object:
-        Class: 6, C-Type: 1 (IPv4)
-        Error Node: 10.2.2.2
-        Error Code: 24 (Routing Problem)
-        Error Value: 1 (Bad Explicit Route)
-        Error Text: "Interface GigabitEthernet0/1 down"
-```
-
 ## Troubleshooting Commands
 
 ### **Monitor RSVP Messages**
@@ -290,6 +194,5 @@ Router# show mpls traffic-eng topology path destination 10.5.5.5
 - **PathErr messages trigger headend reroute** - optimize path after FRR activation
 - **Backup tunnels must be pre-established** - protection requires planning
 - **Message debugging is crucial** - understand flow for effective troubleshooting
-- **Tcpdump captures provide detailed analysis** - packet-level view of RSVP operations
 
 **Pro Tip:** Always monitor both the data plane (traffic flow) and control plane (RSVP messages) when troubleshooting MPLS TE issues. The message flows tell you exactly what RSVP is thinking during failures and recoveries.
