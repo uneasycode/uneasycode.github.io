@@ -1,3 +1,10 @@
+---
+title: "RSVP: Making Real-Time Internet Work"
+category: "Fundamentals"
+description: "Understand how RSVP (Resource ReSerVation Protocol) enables smooth video calls, gaming, and real-time applications by reserving network resources"
+tags: ["RSVP", "QoS", "Real-time", "Bandwidth"]
+---
+
 # RSVP (Resource ReSerVation Protocol): Making Real-Time Internet Work
 
 **Do you know how your favorite apps manage smooth video calls and lag-free gaming, even on a busy network? It's thanks to RSVP – the Resource ReSerVation Protocol.**

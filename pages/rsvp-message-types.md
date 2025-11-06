@@ -1,3 +1,10 @@
+---
+title: "RSVP Message Types & Fast Reroute"
+category: "Advanced"
+description: "Deep dive into RSVP message flows and link protection fast reroute mechanisms in MPLS networks"
+tags: ["RSVP", "MPLS", "Fast Reroute", "Traffic Engineering"]
+---
+
 # RSVP Message Types and Link Protection Fast Reroute
 
 **Understanding RSVP message types is crucial for troubleshooting MPLS Traffic Engineering tunnels. When link protection is enabled, specific message flows occur during failures that network engineers must understand.**

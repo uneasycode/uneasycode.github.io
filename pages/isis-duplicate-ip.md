@@ -1,3 +1,10 @@
+---
+title: "ISIS Duplicate IP Address Issues"
+category: "Advanced"
+description: "Identifying and resolving duplicate IP address problems in ISIS networks that cause routing instability"
+tags: ["ISIS", "Troubleshooting", "IP Address", "Routing"]
+---
+
 # Identifying Duplicate IP Address Issues in ISIS Networks
 
 **Duplicate IP addresses in ISIS networks can cause severe routing instability and adjacency failures. Understanding how to identify and resolve these issues is critical for network stability.**

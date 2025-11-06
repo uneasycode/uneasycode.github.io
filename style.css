@@ -1445,6 +1445,208 @@ body {
     margin: var(--space-16) 0;
 }
 
+/* Mermaid Diagram Styling and Fallbacks */
+.mermaid-rendered {
+    text-align: center;
+    margin: var(--space-16) 0;
+    background: transparent !important;
+}
+
+/* Override Mermaid SVG styling for better visibility */
+.mermaid-rendered svg {
+    background: transparent !important;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Ensure all Mermaid text elements have proper contrast */
+.mermaid-rendered svg text,
+.mermaid-rendered svg .nodeLabel,
+.mermaid-rendered svg .edgeLabel,
+.mermaid-rendered svg .label {
+    fill: var(--color-text) !important;
+    font-family: var(--font-family-base) !important;
+    font-size: 14px !important;
+}
+
+/* Override Mermaid connector and arrow colors */
+.mermaid-rendered svg .edgePath .path {
+    stroke: var(--color-primary) !important;
+}
+
+.mermaid-rendered svg marker path {
+    fill: var(--color-primary) !important;
+}
+
+/* Node styling for better visibility */
+.mermaid-rendered svg .node rect,
+.mermaid-rendered svg .node circle,
+.mermaid-rendered svg .node ellipse {
+    fill: var(--color-surface) !important;
+    stroke: var(--color-border) !important;
+}
+
+.mermaid-rendered svg .clusters rect {
+    fill: var(--color-bg-1) !important;
+    stroke: var(--color-border) !important;
+}
+
+/* Additional contrast for specific Mermaid elements */
+.mermaid-rendered svg .actor {
+    stroke: var(--color-text) !important;
+    fill: var(--color-bg-1) !important;
+}
+
+.mermaid-rendered svg .note rect {
+    fill: var(--color-bg-2) !important;
+    stroke: var(--color-border) !important;
+}
+
+/* Flowchart specific styling */
+.mermaid-rendered svg .flowchart-link {
+    stroke: var(--color-primary) !important;
+}
+
+/* Dark mode specific adjustments */
+@media (prefers-color-scheme: dark) {
+    .mermaid-rendered svg text,
+    .mermaid-rendered svg .nodeLabel,
+    .mermaid-rendered svg .edgeLabel,
+    .mermaid-rendered svg .label {
+        fill: var(--color-gray-200) !important;
+    }
+
+    .mermaid-rendered svg .node rect,
+    .mermaid-rendered svg .node circle,
+    .mermaid-rendered svg .node ellipse {
+        fill: var(--color-charcoal-800) !important;
+        stroke: var(--color-gray-400) !important;
+    }
+
+    .mermaid-rendered svg .clusters rect {
+        fill: rgba(var(--color-teal-300-rgb), 0.1) !important;
+        stroke: var(--color-gray-400) !important;
+    }
+
+    .mermaid-rendered svg .note rect {
+        fill: rgba(180, 83, 9, 0.15) !important;
+        stroke: var(--color-gray-400) !important;
+    }
+}
+
+/* Also handle data-color-scheme attributes */
+[data-color-scheme="dark"] .mermaid-rendered svg text,
+[data-color-scheme="dark"] .mermaid-rendered svg .nodeLabel,
+[data-color-scheme="dark"] .mermaid-rendered svg .edgeLabel,
+[data-color-scheme="dark"] .mermaid-rendered svg .label {
+    fill: var(--color-gray-200) !important;
+}
+
+[data-color-scheme="dark"] .mermaid-rendered svg .node rect,
+[data-color-scheme="dark"] .mermaid-rendered svg .node circle,
+[data-color-scheme="dark"] .mermaid-rendered svg .node ellipse {
+    fill: var(--color-charcoal-800) !important;
+    stroke: var(--color-gray-400) !important;
+}
+
+[data-color-scheme="dark"] .mermaid-rendered svg .clusters rect {
+    fill: rgba(var(--color-teal-300-rgb), 0.1) !important;
+    stroke: var(--color-gray-400) !important;
+}
+
+[data-color-scheme="dark"] .mermaid-rendered svg .note rect {
+    fill: rgba(180, 83, 9, 0.15) !important;
+    stroke: var(--color-gray-400) !important;
+}
+
+.mermaid-unavailable,
+.mermaid-error,
+.mermaid-failed,
+.mermaid-invalid-syntax {
+    background: var(--color-bg-1);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-base);
+    margin: var(--space-16) 0;
+    padding: var(--space-16);
+    text-align: center;
+}
+
+.mermaid-fallback {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-sm);
+}
+
+.mermaid-fallback p {
+    margin-bottom: var(--space-8);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+}
+
+.mermaid-code,
+.mermaid-code pre {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-8);
+    font-size: var(--font-size-xs);
+    line-height: 1.4;
+    overflow-x: auto;
+    margin: 0;
+}
+
+.mermaid-error .mermaid-fallback {
+    background: var(--color-bg-4);
+    border-color: rgba(var(--color-error-rgb), 0.3);
+}
+
+.mermaid-unavailable .mermaid-fallback {
+    background: var(--color-bg-6);
+    border-color: var(--color-warning);
+    color: var(--color-text-secondary);
+}
+
+/* Improve blog post layout */
+.blog-post-content h1,
+.blog-post-content h2,
+.blog-post-content h3,
+.blog-post-content h4 {
+    margin-top: var(--space-32) !important;
+    margin-bottom: var(--space-16) !important;
+    color: var(--color-text) !important;
+}
+
+.blog-post-content p {
+    margin-bottom: var(--space-16) !important;
+    line-height: 1.7 !important;
+    color: var(--color-text-secondary) !important;
+}
+
+.blog-post-content ul,
+.blog-post-content ol {
+    margin-bottom: var(--space-20) !important;
+    color: var(--color-text-secondary) !important;
+}
+
+.blog-post-content li {
+    margin-bottom: var(--space-8) !important;
+}
+
+.blog-post-content code:not(pre code) {
+    word-wrap: break-word;
+}
+
+/* Ensure good visibility for content */
+.blog-post-content {
+    color: var(--color-text) !important;
+}
+
+.blog-post-content pre {
+    background: var(--color-surface) !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: var(--radius-base) !important;
+    overflow-x: auto !important;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     :root {
