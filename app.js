@@ -660,6 +660,11 @@ class BlogManager {
     return { frontmatter, content };
   }
 
+  // Check if content has pre-rendered Mermaid SVGs
+  static hasPreRenderedMermaid(content) {
+    return content.includes('<div class="mermaid-svg">') || content.includes('<svg');
+  }
+
   static async fetchMarkdown(filePath) {
     try {
       const response = await fetch(filePath);
@@ -699,30 +704,43 @@ class BlogManager {
 
       console.log(`Processing content for ${postId}, content length: ${content.length}`);
 
-      // First parse the markdown normally
-      const htmlContent = marked.parse(content);
+      let finalizedContent;
 
-      console.log(`Parsed HTML content length: ${htmlContent.length}`);
+      // Check if content has pre-rendered Mermaid SVGs (from build process)
+      if (BlogManager.hasPreRenderedMermaid(content)) {
+        console.log(`Content has pre-rendered Mermaid SVGs, using as-is`);
+        // Parse markdown normally - SVGs are already embedded
+        finalizedContent = marked.parse(content);
+        console.log(`Parsed HTML content length: ${finalizedContent.length}`);
+      } else {
+        // Legacy processing for content with Mermaid code blocks
+        console.log(`Content has Mermaid code blocks, processing for client-side rendering`);
 
-      // Then replace the generated pre/code blocks with mermaid divs
-      // Marked.js converts ```mermaid...``` to <pre><code class="language-mermaid">...</code></pre>
-      const finalizedContent = htmlContent.replace(
-        /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g,
-        (match, mermaidCode) => {
-          const cleanedCode = mermaidCode.trim()
-            .replace(/</g, '<')
-            .replace(/>/g, '>')
-            .replace(/&/g, '&')
-            .replace(/"/g, '"')
-            .replace(/&#39;/g, "'")
-            .replace(/&nbsp;/g, ' ')
-            .replace(/\\n/g, '\n'); // Convert literal \n to actual newlines
+        // First parse the markdown normally
+        const htmlContent = marked.parse(content);
 
-          console.log(`Original Mermaid code: ${mermaidCode.substring(0, 50)}...`);
-          console.log(`Cleaned Mermaid code: ${cleanedCode.substring(0, 50)}...`);
-          return `<div class="mermaid">${cleanedCode}</div>`;
-        }
-      );
+        console.log(`Parsed HTML content length: ${htmlContent.length}`);
+
+        // Then replace the generated pre/code blocks with mermaid divs
+        // Marked.js converts ```mermaid...``` to <pre><code class="language-mermaid">...</code></pre>
+        finalizedContent = htmlContent.replace(
+          /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g,
+          (match, mermaidCode) => {
+            const cleanedCode = mermaidCode.trim()
+              .replace(/</g, '<')
+              .replace(/>/g, '>')
+              .replace(/&/g, '&')
+              .replace(/"/g, '"')
+              .replace(/&#39;/g, "'")
+              .replace(/&nbsp;/g, ' ')
+              .replace(/\\n/g, '\n'); // Convert literal \n to actual newlines
+
+            console.log(`Original Mermaid code: ${mermaidCode.substring(0, 50)}...`);
+            console.log(`Cleaned Mermaid code: ${cleanedCode.substring(0, 50)}...`);
+            return `<div class="mermaid">${cleanedCode}</div>`;
+          }
+        );
+      }
 
       // Estimate read time (assuming 200 words per minute)
       const wordCount = content.split(/\s+/).length;

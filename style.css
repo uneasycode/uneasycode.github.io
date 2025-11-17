@@ -1445,14 +1445,58 @@ body {
     margin: var(--space-16) 0;
 }
 
-/* Mermaid Diagram Styling and Fallbacks */
+/* Pre-rendered Mermaid SVGs */
+.mermaid-svg {
+    text-align: center;
+    margin: var(--space-16) 0;
+    background: transparent !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+.mermaid-svg svg {
+    background: transparent !important;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    max-width: 100%;
+    height: auto;
+    min-width: 300px;
+}
+
+/* Ensure SVG text is properly sized */
+.mermaid-svg svg text,
+.mermaid-svg svg .nodeLabel,
+.mermaid-svg svg .edgeLabel,
+.mermaid-svg svg .label {
+    font-size: 12px !important;
+    font-family: var(--font-family-base) !important;
+}
+
+/* Responsive SVG sizing */
+@media (max-width: 768px) {
+    .mermaid-svg svg {
+        min-width: 250px;
+        max-width: 100%;
+    }
+
+    .mermaid-svg svg text,
+    .mermaid-svg svg .nodeLabel,
+    .mermaid-svg svg .edgeLabel,
+    .mermaid-svg svg .label {
+        font-size: 10px !important;
+    }
+}
+
+/* Override Mermaid SVG styling for better visibility */
 .mermaid-rendered {
     text-align: center;
     margin: var(--space-16) 0;
     background: transparent !important;
 }
 
-/* Override Mermaid SVG styling for better visibility */
 .mermaid-rendered svg {
     background: transparent !important;
     border-radius: var(--radius-sm);
