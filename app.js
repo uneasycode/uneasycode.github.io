@@ -276,7 +276,7 @@ const appData = {
     },
     {
       "id": "isis-adjacency",
-      "file": "pages/ISIS-Adjacency.md"
+      "file": "pages/isis-adjacency.md"
     },
     {
       "id": "rsvp-message-types",
