@@ -1470,9 +1470,37 @@ body {
 .mermaid-svg svg text,
 .mermaid-svg svg .nodeLabel,
 .mermaid-svg svg .edgeLabel,
-.mermaid-svg svg .label {
-    font-size: 12px !important;
+.mermaid-svg svg .label,
+.mermaid-svg svg foreignObject div,
+.mermaid-svg svg foreignObject span {
+    font-size: 11px !important;
     font-family: var(--font-family-base) !important;
+    line-height: 1.2 !important;
+}
+
+/* Override any inline styles in SVG */
+.mermaid-svg svg [style*="font-size"] {
+    font-size: 11px !important;
+}
+
+/* Specific overrides for different Mermaid elements */
+.mermaid-svg svg .node text,
+.mermaid-svg svg .node .label,
+.mermaid-svg svg .node foreignObject div {
+    font-size: 10px !important;
+    font-weight: normal !important;
+}
+
+.mermaid-svg svg .edgeLabel text,
+.mermaid-svg svg .edgeLabel span {
+    font-size: 9px !important;
+    font-weight: normal !important;
+}
+
+.mermaid-svg svg .cluster-label text,
+.mermaid-svg svg .cluster-label span {
+    font-size: 10px !important;
+    font-weight: bold !important;
 }
 
 /* Responsive SVG sizing */
@@ -1485,8 +1513,21 @@ body {
     .mermaid-svg svg text,
     .mermaid-svg svg .nodeLabel,
     .mermaid-svg svg .edgeLabel,
-    .mermaid-svg svg .label {
-        font-size: 10px !important;
+    .mermaid-svg svg .label,
+    .mermaid-svg svg foreignObject div,
+    .mermaid-svg svg foreignObject span {
+        font-size: 9px !important;
+    }
+
+    .mermaid-svg svg .node text,
+    .mermaid-svg svg .node .label,
+    .mermaid-svg svg .node foreignObject div {
+        font-size: 8px !important;
+    }
+
+    .mermaid-svg svg .edgeLabel text,
+    .mermaid-svg svg .edgeLabel span {
+        font-size: 7px !important;
     }
 }
 
